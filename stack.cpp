@@ -1,50 +1,62 @@
 #include<stdio.h>
 #include<iostream>
 #include<math.h>
-#include <stack.h>
+#include "stack.h"
 #include "disc.h"
 using namespace std;
 
 Stack::Stack()
 {
-
 }
 /*
 Stack::~Stack()
 {
-	// delete data;
 }
 */
 
-void Stack::push(void* inData)
+void Stack::push(Disc* inData)
 {
-	// your code
+    Node* currentNode = this->pTop;
+    Node* newNode = new Node;
+    newNode->data = inData;
+    this->pTop = newNode;
+    newNode->pNext=currentNode;
 }
-void* Stack::pop()
+Disc* Stack::pop()
 {
-	// your code
+    if(empty()){
+        Disc* temp = new Disc;
+        return temp;
+    }
+    Node* currentNode = this->pTop;
+
+    Node* nextNode = currentNode->pNext;
+    this->pTop = nextNode;
+    return currentNode->data;
 }
 
-void* Stack::top()
+Disc* Stack::top()
 {
-	// your code
+    if(empty()){
+        return nullptr;
+    }
+    return this->pTop->data;
 }
 
 bool Stack::empty()
 {
-	// your code
+    if(pTop == nullptr){
+        return true;
+    }
+    return false;
 }
 
-void Stack::display()
-{
-	//cout<<endl;
-	Node *p1;
-	p1 = pTop;
-	while (p1 != NULL)
-	{
-		cout<< ((Disc*)(p1->data))->toString()<<"\t";
-		p1 = p1->pNext;
-	}
-	cout<<endl;
+void Stack::display() {
+    //cout<<endl;
+    Node *p1;
+    p1 = pTop;
+    while (p1 != NULL) {
+        cout << ((Disc *) (p1->data))->toString() << "\t";
+        p1 = p1->pNext;
+    }
 }
-
